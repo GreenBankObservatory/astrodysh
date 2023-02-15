@@ -1,7 +1,7 @@
 ---
 # See https://pre-commit.com for more information
 default_language_version:
-  python: python3.7
+  python: python3.8
 
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
@@ -23,7 +23,7 @@ repos:
           - '--fix=lf'
       - id: check-docstring-first
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: 'v0.0.243'
+    rev: 'v0.0.247'
     hooks:
       - id: ruff
         args:
@@ -32,3 +32,9 @@ repos:
     rev: 23.1.0
     hooks:
       - id: black
+  - repo: https://github.com/jazzband/pip-tools
+    rev: 6.12.2
+    hooks:
+      - id: pip-compile
+        args:
+          - '--resolver=backtracking'

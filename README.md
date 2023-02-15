@@ -4,7 +4,7 @@ astrodysh!
 
 ## Installation
 
-astrodysh requires Python 3.11+. Once you are in a suitable environment, simply:
+astrodysh requires Python 3.8+. Once you are in a suitable environment, simply:
 
 ```bash
 # Currently available only via GBO's private PyPI repository
@@ -15,13 +15,24 @@ $ pip install pyspeckit --extra-index-url http://pypi.gb.nrao.edu/simple
 
 If you are working on astrodysh itself, here's how to get your environment set up
 
+First, you'll need `hatch` installed. The "proper" way to do that is via pipx:
+
 ```bash
-$ python3.11 -m venv /path/to/venvs/astrodysh-3.11
-$ source /path/to/venvs/astrodysh-3.11/bin/activate
-$ pip install -U pip setuptools wheel pdm
-# pyspeckit must be manually installed via pip to avoid errors :(
-$ pip install pyspeckit
-$ pdm install
+$ pipx install hatch
+```
+
+But you can also manage your virtual environment entirely yourself:
+
+```bash
+$ python3.8 -m venv /path/to/venvs/astrodysh-3.8
+$ source /path/to/venvs/astrodysh-3.8/bin/activate
+$ pip install hatch
+```
+
+Once you have `hatch`, simply:
+
+```
+$ pip install -e .
 ```
 
 To validate your virtual environment, you can run the tests:
@@ -30,7 +41,8 @@ To validate your virtual environment, you can run the tests:
 $ pytest
 ```
 
-And run the CLI directly, via:
+You can run astrodysh CLI via:
+
 
 ```bash
 $ astrodysh --help
