@@ -1,3 +1,7 @@
+[build-system]
+requires = ["pdm-pep517>=1.0"]
+build-backend = "pdm.pep517.api"
+
 [project]
 name = "astrodysh"
 version = "0.1.0a1"
@@ -6,19 +10,54 @@ authors = [
     {name = "Thomas Chamberlin", email = "tchamber@nrao.edu"},
 ]
 dependencies = [
-    "pyspeckit>=1.0.1",
+    "pyspeckit @ git+https://github.com/pyspeckit/pyspeckit",
     "astropy>=5.2.1",
+    "matplotlib>=3.7.0",
+    "numpy>=1.24.2",
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.8"
 readme = "README.md"
 license = {file = "LICENSE"}
 
 [project.scripts]
 astrodysh = "astrodysh.astrodysh:main"
 
+[tool]
+
+[tool.pdm.scripts]
+lint = {shell=  "ruff **/*.py"}
+test = "pytest"
+
 [tool.pdm.build]
 includes = []
 
-[build-system]
-requires = ["pdm-pep517>=1.0"]
-build-backend = "pdm.pep517.api"
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest>=7.2.1",
+]
+
+[tool.black]
+preview = true
+line-length = 120
+
+[tool.ruff]
+line-length = 120
+
+[tool.pyright]
+reportImplicitStringConcatenation = false
+
+[tool.isort]
+# See: https://pycqa.github.io/isort/docs/configuration/options/#example-pyprojecttoml
+profile = "black"
+combine_as_imports = true
+sections = [
+    "FUTURE",
+    "STDLIB",
+    "THIRDPARTY",
+    "FIRSTPARTY",
+    "LOCALFOLDER"
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = ["tests"]
